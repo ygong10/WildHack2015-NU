@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+ 	<head>
+ 	<title>CS233 TOP HAUS</title>
+ 	</head>
+		<body>
+		<div>
+		<h3>Rate the class in terms of difficulty, 1 being the easiest, 5 being the hardest</h3>
+		<select align ="center" onchange="added to database">
+			<option value="1">1</option>
+			<option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		    <option value="5">5</option>
+		</select>
+		</div>
+
+		<div>
+		<h3>Did you enjoy the course overall?, 1 being Never Again, 5 being Would totally take again</h3>
+		<select align ="center" onchange="added to database">
+			<option value="1">1</option>
+			<option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		    <option value="5">5</option>
+		</select>
+		</div>
+
+		<div>
+		<h3>Did you find the class useful?, 1 being completely useless, 5 being I use it almost everyday</h3>
+		<select align ="center" onchange="added to database">
+			<option value="1">1</option>
+			<option value="2">2</option>
+		    <option value="3">3</option>
+		    <option value="4">4</option>
+		    <option value="5">5</option>
+		</select>
+		</div>
+		<br>
+		<br>
+		<div>
+		<button><a href="thankyou.html" style='text-decoration: none;'>Done</a></button>
+		</div>
+
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<!-- D3J immport -->
+		<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<!-- Plotly.js -->
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<script>
+		function do_something(event){
+			alert(this.options[this.selectedIndex].text);
+		}
+		</script>
+	</body>
+</html>

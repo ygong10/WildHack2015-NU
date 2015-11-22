@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+ 	<head>
+ 	<title>Best Chatroom NA</title>
+ 	<style>
+ 	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+ 	body {
+		font: 13px Helvetica, Arial;
+	} 
+ 	form {
+		background: #000;
+		padding: 3px;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+	}
+ 	form input {
+		border: 0;
+		padding: 10px;
+		width: 90%;
+		margin-right: .5%;
+	}
+ 	form button {
+		width: 9%;
+		background: rgb(130, 224, 255);
+		border: none;
+		padding: 10px;
+	}
+ 	#messages {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+ 	#messages li {
+		padding: 5px 10px;
+	}
+ 	#messages li:nth-child(odd) {
+		background: #eee;
+	}
+	
+	#sidebar {
+		background-color: #eee;
+		left: 87%;
+		height: 70%;
+		width: 15%;
+		border: 1px black solid;
+		margin-top: 40px;
+		position: fixed;
+		border-radius: 5px;
+		float: right;
+	}
+	#sidebar: hover {
+		background-color: black;
+	}
+	#sidebar #items {
+		list-style-type: none;
+	}
+	#sidebar li {
+		font-size: 22px;
+		margin: 20px 40px;
+	}
+
+</style>
+</head>
+	<body>
+	<div><h1>UIUC Chatroom!</h1></div>
+	<div align="center"><h1>RANDOM</h1></div>
+	<div><h1 id="count" align="right">Online: 0</h1></div>
+		<div id="sidebar">
+			<ul id="items" align="center">
+				<li>#General</li>
+				<li>#Help</li>
+				<li><strong><h3>#Random</h3></strong></li>
+				<li><a href="" style="text-decoration:none">#Statistics</a></li>
+				<li><a href="page1.html" onclick="return confirm('Have you took or are currently taking CS233?')"style="height:100%;width:100%;text-decoration:none">#CS225</a></li>
+				<li><a href="page2.html" onclick="return confirm('Have you took or are currently taking CS241?')"style="height:100%;width:100%;text-decoration:none">#CS241</a></li>
+				<li><a href="page3.html" onclick="return confirm('Have you took or are currently taking CS374?')"style="height:100%;width:100%;text-decoration:none">#CS374</a></li>
+				<li>#Cats</li>
+			</ul>
+		</div>
+
+
+		<ul id="messages"></ul>
+		<form action="">
+			<input id="m" autocomplete="off" /><button>Send</button>
+		</form>
+		<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<!-- D3J immport -->
+		<script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<!-- Plotly.js -->
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<script>
+
+		var socket = io();
+		$('form').submit(function(){
+			socket.emit('chat message', $('#m').val());
+			$('#m').val('');
+			return false;
+		});
+		socket.on('user connected', function(msg){
+			$('#messages').append($('<li>').html(msg));
+		});
+
+		//testing
+		socket.on('one more user', function(online){
+			document.getElementById("count").innerHTML = "Online:" + online;
+		});
+
+		socket.on('chat message', function(msg){
+			$('#messages').append($('<li>').html(msg));
+		});
+
+		socket.on('image message', function(msg){
+			$('#messages').append($('<li>').html("<img src='"+ msg + "'>"))
+		});
+
+		socket.on('user disconnect', function(msg) {
+			$('#messages').append($('<li>').html(msg));
+		});
+
+		socket.on('one less user', function(online){
+			document.getElementById("count").innerHTML = "Online:" + online;
+		});
+
+		</script>
+	</body>
+</html>
